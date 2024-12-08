@@ -1,0 +1,606 @@
+﻿<Cube xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="f7feabf7-a44e-4045-b683-f8288959cab2" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>Appointify Warehouse</ID>
+  <MeasureGroups>
+    <MeasureGroup>
+      <ID>Appointment</ID>
+      <Partitions>
+        <Partition dwd:design-time-name="f156456c-f97b-4019-a074-fe2c93c6d85a">
+          <ID>Appointment</ID>
+          <Name>Appointment</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="41401827-21ff-421c-ba86-0ccaa3336a63">
+            <DataSourceViewID>Appointify Warehouse</DataSourceViewID>
+            <TableID>dbo_Appointment</TableID>
+          </Source>
+          <StorageMode>Holap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+          <ProactiveCaching dwd:design-time-name="5cdf094b-0b35-4f10-84b7-06d01070816a">
+            <SilenceInterval>PT0S</SilenceInterval>
+            <Latency>PT0S</Latency>
+            <SilenceOverrideInterval>-PT1S</SilenceOverrideInterval>
+            <ForceRebuildInterval>-PT1S</ForceRebuildInterval>
+            <Enabled>true</Enabled>
+            <AggregationStorage>MolapOnly</AggregationStorage>
+            <Source xsi:type="ProactiveCachingInheritedBinding" dwd:design-time-name="9aaf0565-0338-4f60-b216-be1cea497bd9">
+              <NotificationTechnique>Server</NotificationTechnique>
+            </Source>
+          </ProactiveCaching>
+          <EstimatedRows>500000</EstimatedRows>
+          <AggregationDesignID>AggregationDesign</AggregationDesignID>
+        </Partition>
+      </Partitions>
+      <AggregationDesigns>
+        <AggregationDesign>
+          <ID>AggregationDesign</ID>
+          <Name>AggregationDesign</Name>
+          <CreatedTimestamp>2024-06-13T01:56:01.783333Z</CreatedTimestamp>
+          <LastSchemaUpdate>2024-06-13T01:56:01.783333Z</LastSchemaUpdate>
+          <EstimatedRows>500000</EstimatedRows>
+          <Dimensions>
+            <Dimension>
+              <CubeDimensionID>Company</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>Company ID</AttributeID>
+                  <EstimatedCount>309</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Company Name</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Type Of Company</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Ratings Of Company Category</AttributeID>
+                  <EstimatedCount>5</EstimatedCount>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+            <Dimension>
+              <CubeDimensionID>Time</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>Time ID</AttributeID>
+                  <EstimatedCount>1440</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Hour</AttributeID>
+                  <EstimatedCount>24</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Minutes</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Time Of Day</AttributeID>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+            <Dimension>
+              <CubeDimensionID>Customer</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>Customer ID</AttributeID>
+                  <EstimatedCount>9500</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Name And Surname</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Gender</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>PESEL</AttributeID>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+            <Dimension>
+              <CubeDimensionID>Worker</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>Worker ID</AttributeID>
+                  <EstimatedCount>920</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Name And Surname</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Gender</AttributeID>
+                  <EstimatedCount>2</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>PESEL</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Job Title</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Ratings Of Worker Category</AttributeID>
+                  <EstimatedCount>6</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Is Current</AttributeID>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+            <Dimension>
+              <CubeDimensionID>Service Type</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>Service ID</AttributeID>
+                  <EstimatedCount>3021</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Service Name</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Service Category</AttributeID>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+            <Dimension>
+              <CubeDimensionID>Date</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>Date ID</AttributeID>
+                  <EstimatedCount>2557</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Date</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Year</AttributeID>
+                  <EstimatedCount>7</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Month</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Month No</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Day Of Week</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Day Of Week No</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Is Holiday</AttributeID>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+            <Dimension>
+              <CubeDimensionID>Junk</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>Junk ID</AttributeID>
+                  <EstimatedCount>27</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Status Of Appointment</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Is Free</AttributeID>
+                  <EstimatedCount>2</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Is Promo Code Used</AttributeID>
+                  <EstimatedCount>2</EstimatedCount>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+          </Dimensions>
+          <Aggregations>
+            <Aggregation>
+              <ID>Aggregation 0</ID>
+              <Name>Aggregation 0</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Company</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Ratings Of Company Category</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Time</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Customer</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Worker</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Ratings Of Worker Category</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>Gender</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Service Type</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Date</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Junk</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Is Promo Code Used</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>Is Free</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 1</ID>
+              <Name>Aggregation 1</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Company</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Ratings Of Company Category</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Time</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Customer</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Worker</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Gender</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Service Type</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Junk</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Junk ID</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 2</ID>
+              <Name>Aggregation 2</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Company</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Time</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Customer</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Worker</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Ratings Of Worker Category</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>Gender</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Service Type</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Junk</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Junk ID</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 3</ID>
+              <Name>Aggregation 3</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Company</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Time</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Customer</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Worker</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Gender</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Service Type</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Date</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Junk</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Junk ID</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 4</ID>
+              <Name>Aggregation 4</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Company</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Ratings Of Company Category</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Time</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Hour</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Customer</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Worker</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Gender</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Service Type</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Date</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Junk</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Is Promo Code Used</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>Is Free</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 5</ID>
+              <Name>Aggregation 5</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Company</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Company ID</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Time</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Customer</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Worker</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Gender</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Service Type</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Junk</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 6</ID>
+              <Name>Aggregation 6</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Company</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Time</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Hour</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Customer</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Worker</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Ratings Of Worker Category</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>Gender</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Service Type</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Date</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Junk</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Is Promo Code Used</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>Is Free</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 7</ID>
+              <Name>Aggregation 7</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Company</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Time</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Customer</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Worker</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Worker ID</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Service Type</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Junk</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 8</ID>
+              <Name>Aggregation 8</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Company</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Ratings Of Company Category</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Time</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Hour</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Customer</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Worker</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Ratings Of Worker Category</AttributeID>
+                    </Attribute>
+                    <Attribute>
+                      <AttributeID>Gender</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Service Type</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Junk</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Is Free</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+          </Aggregations>
+        </AggregationDesign>
+      </AggregationDesigns>
+    </MeasureGroup>
+  </MeasureGroups>
+</Cube>
