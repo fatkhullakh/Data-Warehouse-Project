@@ -1,0 +1,205 @@
+
+
+--1. Rating of Workers Influence on Number of Bookings
+
+SELECT 
+    {[Measures].[Appointment Count]} ON COLUMNS,
+    [Worker].[Ratings Hierarchy].MEMBERS ON ROWS
+FROM [Appointify Warehouse]
+
+
+
+
+--2. Rating of Companies Influence on Number of Bookings
+
+SELECT 
+    {[Measures].[Appointment Count]} ON COLUMNS,
+    [Company].[Company Ratings Hierarchy].MEMBERS ON ROWS
+FROM [Appointify Warehouse]
+
+
+
+
+--3. How effective are promo codes?
+
+SELECT 
+    {[Measures].[Appointment Count]} ON COLUMNS,
+    [Junk].[Promo Code Usage Hierarchy].[Is Promo Code Used].MEMBERS ON ROWS
+FROM [Appointify Warehouse]
+
+
+
+
+--4. Compare the number of appointments near-the-holidays days in current and previous month? 
+
+WITH MEMBER [Measures].[Before Holiday Day] AS 
+    Aggregate(
+        [Date].[Date].CurrentMember.PrevMember
+    )
+SELECT 
+    {[Measures].[Appointment Count]} ON COLUMNS,
+    NON EMPTY 
+    {
+        [Date].[Year-Month-Hierarchy].[Year].&[2023].Children,
+        [Date].[Year-Month-Hierarchy].[Month].Members
+    } ON ROWS
+FROM [Appointify Warehouse]
+
+
+
+
+--5. Are customers who had free appointments are likely to book another (normal) appointments?
+
+SELECT 
+    {[Measures].[Appointment Count]} ON COLUMNS,
+    [Junk].[Hierarchy].[Is Free].Members ON ROWS
+FROM [Appointify Warehouse]
+
+
+
+ 
+
+ --6. Find the peak time during the day?
+
+ SELECT 
+    {[Measures].[Appointment Count]} ON COLUMNS,
+    [Time].[Time Of Day].[Time Of Day].Members ON ROWS
+FROM [Appointify Warehouse]
+
+
+
+
+
+
+--7. Which companies have the most amount of booking?
+
+--By Type of Company
+SELECT 
+    {[Measures].[Appointment Count]} ON COLUMNS,
+    [Company].[Type Of Company].Members ON ROWS
+FROM [Appointify Warehouse]
+
+--Shows by Order in DESC
+SELECT 
+    {[Measures].[Appointment Count]} ON COLUMNS,
+    ORDER(
+        [Company].[Company ID].Members,
+        [Measures].[Appointment Count],
+        DESC
+    ) ON ROWS
+FROM [Appointify Warehouse]
+
+--For only TOP 10 
+SELECT 
+    {[Measures].[Appointment Count]} ON COLUMNS,
+    TOPCOUNT(
+        [Company].[Company ID].Members,
+        10,
+        [Measures].[Appointment Count]
+    ) ON ROWS
+FROM [Appointify Warehouse]
+
+
+
+
+
+
+--8. Which services are most popular? (TOP 10 Services)
+
+SELECT 
+    {[Measures].[Appointment Count]} ON COLUMNS,
+	TOPCOUNT(
+    [Service Type].[Service ID].Members,
+	10,
+	[Measures].[Appointment Count]
+	) ON ROWS
+FROM [Appointify Warehouse]
+
+
+
+
+--9. Compare the total bookings made by men and women? 
+
+SELECT 
+    {[Measures].[Appointment Count]} ON COLUMNS,
+    [Customer].[Gender].Members ON ROWS
+FROM [Appointify Warehouse]
+
+
+
+
+
+--10. What Is the Impact of Weekday vs. Weekend on Booking Volumes?
+
+SELECT 
+    {[Measures].[Appointment Count]} ON COLUMNS,
+    [Date].[Day Of Week].Members ON ROWS
+FROM [Appointify Warehouse]
+
+
+
+
+
+
+
+
+
+
+
+
+
+--OTHER. NO NEED 
+SELECT 
+    {[Measures].[Customer Count]} ON COLUMNS,
+    TOPCOUNT(
+        [Company].[Company ID].Members,
+        100,
+        [Measures].[Customer Count]
+    ) ON ROWS
+FROM [Appointify Warehouse]
+
+
+
+WITH 
+MEMBER [Measures].[Previous Year Appointment Count] AS 
+    ([Measures].[Appointment Count], [Date].[Year].PrevMember)
+
+SELECT 
+    {
+        [Measures].[Appointment Count], 
+        [Measures].[Previous Year Appointment Count]
+    } ON COLUMNS,
+    [Date].[Year].Members ON ROWS
+FROM [Appointify Warehouse]
+
+
+
+
+WITH 
+MEMBER [Measures].[Previous Year Appointment Count] AS 
+    ([Measures].[Appointment Count], [Date].[Year].PrevMember)
+
+MEMBER [Measures].[Goal] AS 
+    [Measures].[Previous Year Appointment Count] * 1.2
+
+MEMBER [Measures].[Status] AS 
+    IIF(
+        [Measures].[Appointment Count] >= [Measures].[Goal], 
+        1, 
+        0
+    )
+
+MEMBER [Measures].[Trend] AS 
+    [Measures].[Appointment Count] - [Measures].[Previous Year Appointment Count]
+
+SELECT 
+    {
+        [Measures].[Appointment Count], 
+        [Measures].[Previous Year Appointment Count], 
+        [Measures].[Goal], 
+        [Measures].[Status], 
+        [Measures].[Trend]
+    } ON COLUMNS,
+    [Date].[Year].Members ON ROWS
+FROM [Appointify Warehouse]
+
