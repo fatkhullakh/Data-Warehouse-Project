@@ -1,0 +1,38 @@
+--1. Compare the number of appointments near-the-holidays days in current and previous month? (Query with Aggregations on Dates)
+
+WITH MEMBER [Measures].[Before Holiday Day] AS 
+    Aggregate(
+        [Date].[Date].CurrentMember.PrevMember
+    )
+SELECT 
+    {[Measures].[Appointment Count]} ON COLUMNS,
+    NON EMPTY 
+    {
+        [Date].[Year-Month-Hierarchy].[Year].&[2023].Children,
+        [Date].[Year-Month-Hierarchy].[Month].Members
+    } ON ROWS
+FROM [Appointify Warehouse]
+
+
+
+
+--2. How effective are promo codes? (Query for a Particular Dimension Attribute)
+
+SELECT 
+    {[Measures].[Appointment Count]} ON COLUMNS,
+    [Junk].[Promo Code Usage Hierarchy].[Is Promo Code Used].MEMBERS ON ROWS
+FROM [Appointify Warehouse]
+
+
+
+
+--3. Which services are most popular? (General Query)
+
+SELECT 
+    {[Measures].[Appointment Count]} ON COLUMNS,
+	TOPCOUNT(
+    [Service Type].[Service ID].Members,
+	10,
+	[Measures].[Appointment Count]
+	) ON ROWS
+FROM [Appointify Warehouse]
